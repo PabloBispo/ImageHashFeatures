@@ -20,6 +20,12 @@ from imagehash import average_hash, colorhash, dhash, phash, whash
 from PIL import Image
 from tqdm import tqdm
 
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.decomposition import PCA
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
+
+
 
 HASH_SIZE = 8
 
@@ -333,10 +339,6 @@ images_df
 
 #%%
 
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.decomposition import PCA
-from sklearn.model_selection import train_test_split
-
 
 X = images_df[img_feat_cols_].copy()
 y = images_df.bin_label
@@ -361,8 +363,6 @@ rfc.fit(X_train, y_train)
 y_pred = rfc.predict(X_test)
 
 #%%
-
-from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
 
 
 print('accuracy_score: ', accuracy_score(y_test, y_pred))
